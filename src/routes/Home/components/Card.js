@@ -27,16 +27,25 @@ const cardSource = {
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
 }))
-export const Card = (props) => (
-  <div className="card">
-    <p>{props.title}</p>
-  </div>
-)
+export class Card extends React.Component {
 
-Card.propTypes = {
-  connectDragStart: PropTypes.func.isRequired,
-  isDragging: PropTypes.bool.isRequired,
-  name: PropTypes.string.isRequired
+  static propTypes = {
+    connectDragStart: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired
+  }
+
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div className="card">
+        <p>{props.title}</p>
+      </div>
+    )
+  }
 }
 
 export default Card
