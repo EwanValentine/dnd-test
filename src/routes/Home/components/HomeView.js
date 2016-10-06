@@ -1,14 +1,17 @@
 import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
 import './HomeView.scss'
+
+import Card from './Card'
+
+const cards = [
+  { id: 1, title: 'This is a test card' },
+  { id: 2, title: 'This is another card' },
+]
 
 export const HomeView = () => (
   <div>
     <h4>Welcome!</h4>
-    <img
-      alt='This is a duck, because Redux!'
-      className='duck'
-      src={DuckImage} />
+    {cards.map(card => <Card id={card.id} />)}
   </div>
 )
 
