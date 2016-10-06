@@ -2,6 +2,7 @@ import React from 'react'
 import './HomeView.scss'
 
 import Card from './Card'
+import DoneZone from './DropZone'
 
 const cards = [
   { id: 1, title: 'This is a test card' },
@@ -11,7 +12,10 @@ const cards = [
 export const HomeView = () => (
   <div>
     <h4>Welcome!</h4>
-    {cards.map(card => <Card id={card.id} />)}
+    <DoneZone />
+    {cards.map(card => 
+      <Card id={card.id} title={card.title}/>
+    )}
   </div>
 )
 

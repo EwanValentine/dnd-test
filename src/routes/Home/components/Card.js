@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const Card = ({props}) => (
-  <div className="">
+import "./Card.scss"
+
+export const Card = (props) => (
+  <div className="card">
     <p>{props.title}</p>
   </div>
 )
