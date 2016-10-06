@@ -3,6 +3,7 @@ import './HomeView.scss'
 
 import Card from './Card'
 import DoneZone from './DropZone'
+import { ItemTypes } from 'Constants'
 
 const cards = [
   { id: 1, title: 'This is a test card' },
