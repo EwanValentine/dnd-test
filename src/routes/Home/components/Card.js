@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 
 import "./Card.scss"
 import { DragSource } from 'react-dnd'
+import { ItemTypes } from 'Constants'
 
 const cardSource = {
 

@@ -31,8 +31,17 @@ const config = {
   // ----------------------------------
   compiler_babel : {
     cacheDirectory : true,
-    plugins        : ['transform-runtime'],
-    presets        : ['es2015', 'react', 'stage-0', 'es2016']
+    plugins        : [
+      'transform-runtime',
+      'babel-plugin-transform-decorators-legacy'
+    ],
+    presets        : [
+      'es2015', 
+      'react', 
+      'stage-0', 
+      'es2016',
+
+    ]
   },
   compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
