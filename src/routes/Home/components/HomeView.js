@@ -4,20 +4,34 @@ import './HomeView.scss'
 import Card from './Card'
 import DoneZone from './DropZone'
 import { ItemTypes } from 'Constants'
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 const cards = [
-  { id: 1, title: 'This is a test card' },
-  { id: 2, title: 'This is another card' },
+  { id: 1, name: 'image-one', type: 'image' },
+  { id: 2, name: 'colour-two', type: 'colour' },
 ]
 
-export const HomeView = () => (
-  <div>
-    <h4>Welcome!</h4>
-    <DoneZone />
-    {cards.map(card => 
-      <Card id={card.id} title={card.title}/>
-    )}
-  </div>
-)
+@DragDropContext(HTML5Backend)
+export default class HomeView extends React.Component {
 
-export default HomeView
+  constructor(props) {
+    super(props) 
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)  
+  }
+
+  render() {
+    return (
+      <div>
+        <h4>Welcome!</h4>
+        <DoneZone />
+        {cards.map(card => 
+          <Card id={card.id} name={card.name} type={card.type} />
+        )}
+      </div>
+    )
+  }
+}

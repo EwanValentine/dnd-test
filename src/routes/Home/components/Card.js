@@ -8,15 +8,21 @@ const cardSource = {
 
   beginDrag(props) {
     return {
-      name: props.name
+      name: props.name,
+      id: props.id,
+      type: props.type,
     };
   },
 
   endDrag(props, monitor) {
-    const item = monitor.getItem();
-    const dropResult = monitor.getDropResult();
+    const item = monitor.getItem()
+    const dropResult = monitor.getDropResult()
 
-    if (dropResult) {
+    console.log(item)
+    console.log(dropResult)
+
+    if (dropResult.type === item.type) {
+
       window.alert( // eslint-disable-line no-alert
         `You dropped ${item.name} into ${dropResult.name}!`
       );
@@ -31,9 +37,11 @@ const cardSource = {
 export class Card extends React.Component {
 
   static propTypes = {
-    connectDragStart: PropTypes.func.isRequired,
+    connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -41,9 +49,14 @@ export class Card extends React.Component {
   }
 
   render() {
-    return (
-      <div className="card">
-        <p>{props.title}</p>
+    const { isDragging, connectDragSource } = this.props
+    const { name } = this.props
+
+    const opacity = isDragging ? 0.3 : 1
+
+    return connectDragSource(
+      <div className="card" style={{ opacity }}>
+        <p>{name}</p>
       </div>
     )
   }
