@@ -24,12 +24,13 @@ export default class HomeView extends React.Component {
   }
 
   render() {
+    const { actions } = this.props
     return (
       <div>
         <h4>Welcome!</h4>
         <DoneZone />
         {cards.map(card => 
-          <Card id={card.id} name={card.name} type={card.type} />
+          <Card id={card.id} name={card.name} type={card.type} actions={actions} />
         )}
       </div>
     )

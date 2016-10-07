@@ -11,7 +11,7 @@ const cardSource = {
       name: props.name,
       id: props.id,
       type: props.type,
-    };
+    }
   },
 
   endDrag(props, monitor) {
@@ -22,6 +22,8 @@ const cardSource = {
     console.log(dropResult)
 
     if (dropResult.type === item.type) {
+      
+      props.actions.deleteCard(item.id)
 
       window.alert( // eslint-disable-line no-alert
         `You dropped ${item.name} into ${dropResult.name}!`
