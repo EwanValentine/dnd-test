@@ -1,16 +1,11 @@
 import React from 'react'
 import './HomeView.scss'
 
-import Card from './Card'
+import Card from 'components/cards/Card'
 import DoneZone from './DropZone'
 import { ItemTypes } from 'Constants'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
-
-const cards = [
-  { id: 1, name: 'image-one', type: 'image' },
-  { id: 2, name: 'colour-two', type: 'colour' },
-]
 
 @DragDropContext(HTML5Backend)
 export default class HomeView extends React.Component {
@@ -19,18 +14,31 @@ export default class HomeView extends React.Component {
     super(props) 
   }
 
+  componentWillMount() {
+    const { actions } = this.props
+    actions.getCards()
+  }
+
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)  
+    const { cards } = this.props
+    if (nextProps.cards.length !== cards.length) {
+      this.forceUpdate()
+    }
   }
 
   render() {
-    const { actions } = this.props
+    const { actions, cards } = this.props
     return (
-      <div>
+      <div className="home-container">
         <h4>Welcome!</h4>
-        <DoneZone />
-        {cards.map(card => 
-          <Card id={card.id} name={card.name} type={card.type} actions={actions} />
+        <div className="dropzone-container">
+          <DoneZone status="todo" cards={cards} actions={actions} />
+          <DoneZone status="doing" cards={cards} actions={actions} />
+          <DoneZone status="done" cards={cards} actions={actions} />
+        </div>
+        {cards.filter(card => card.status === null)
+               .map(card => 
+          <Card {...card} actions={actions} />
         )}
       </div>
     )

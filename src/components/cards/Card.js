@@ -14,21 +14,26 @@ const cardSource = {
     }
   },
 
+  /**
+   * endDrag
+   *
+   * @param {Object} props
+   * @param {Object} monitor
+   */
   endDrag(props, monitor) {
     const item = monitor.getItem()
     const dropResult = monitor.getDropResult()
 
-    console.log(item)
-    console.log(dropResult)
-
-    if (dropResult.type === item.type) {
-      
-      props.actions.deleteCard(item.id)
-
-      window.alert( // eslint-disable-line no-alert
-        `You dropped ${item.name} into ${dropResult.name}!`
-      );
+    // If dropzone
+    if (dropResult && dropResult.type === "remove") {
+      props.actions.removeCard(item.id)
+      return
+    } else if (dropResult && dropResult.status) {
+      props.actions.moveCard(item.id, dropResult.status)
+      return
     }
+
+    window.alert("Update failed!")
   }
 }
 
@@ -46,6 +51,11 @@ export class Card extends React.Component {
     type: PropTypes.string.isRequired,
   }
 
+  /**
+   * constructor
+   *
+   * @param {Object} props
+   */
   constructor(props) {
     super(props)
   }
