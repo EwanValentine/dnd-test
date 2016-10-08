@@ -37,7 +37,7 @@ export default class DropZone extends React.Component {
     const isActive = canDrop && isOver
     return connectDropTarget(
       <div className="drop-zone">
-        <h2>{this.props.status}</h2>
+        <h2>{this.props.name}</h2>
         {isActive ? <p>Drop here...</p> : false}
 
         <div className="drop-zone__cards">

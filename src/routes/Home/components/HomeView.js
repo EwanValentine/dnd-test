@@ -15,26 +15,33 @@ export default class HomeView extends React.Component {
   }
 
   componentWillMount() {
-    const { actions } = this.props
+    const { actions, columnActions } = this.props
     actions.getCards()
+    columnActions.getColumns()
   }
 
   componentWillReceiveProps(nextProps) {
-    const { cards } = this.props
+    const { cards, columns } = this.props
     if (nextProps.cards.length !== cards.length) {
+      this.forceUpdate()
+    }
+
+    if (nextProps.columns.length !== columns.length) {
       this.forceUpdate()
     }
   }
 
   render() {
-    const { actions, cards } = this.props
+    const { actions, cards, columns } = this.props
     return (
       <div className="home-container">
-        <h4>Welcome!</h4>
         <div className="dropzone-container">
-          <DoneZone status="todo" cards={cards} actions={actions} />
-          <DoneZone status="doing" cards={cards} actions={actions} />
-          <DoneZone status="done" cards={cards} actions={actions} />
+          {columns.map((col, i) => 
+            <DoneZone key={i} 
+                      {...col}
+                      cards={cards} 
+                      actions={actions} />    
+          )}
         </div>
         {cards.filter(card => card.status === null)
                .map(card => 
