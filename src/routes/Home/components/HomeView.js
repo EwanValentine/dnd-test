@@ -35,6 +35,7 @@ export default class HomeView extends React.Component {
     const { actions, cards, columns } = this.props
     return (
       <div className="home-container">
+        <button>Add Column</button>
         <div className="dropzone-container">
           {columns.map((col, i) => 
             <DoneZone key={i} 
